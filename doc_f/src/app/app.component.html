@@ -1,0 +1,24 @@
+<div class="container">
+  <div class="row">
+    <input 
+      type="file" 
+      class="btn btn-primary"
+      (change)="upload($event)"
+    >
+  </div>
+
+  <div class="row">
+    <div 
+      *ngFor="let url of images"
+      class="col-6 col-sm-4 col-lg-3 my-3"
+    >
+      <img 
+        [src]="baseUrl + url" 
+        alt="" 
+        class="w-100"
+      >
+    </div>
+  </div>
+
+  <router-outlet></router-outlet>
+</div>

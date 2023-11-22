@@ -1,0 +1,42 @@
+version: '3'
+
+services:
+  mysql:
+    image: mysql:latest
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin:latest
+    restart: always
+    environment:
+      PMA_ARBITRARY: 1
+      PMA_HOST: mysql
+    ports:
+      - "8888:80"
+    depends_on:
+      - mysql
+
+  doc_b:
+    image: doc_b
+    restart: always
+    ports:
+      - "3000:3000"
+    volumes:
+      - files:/doc_b/files
+
+  doc_f:
+    image: doc_f
+    restart: always
+    ports:
+      - "4000:80"
+
+
+volumes:
+  mysql_data:
+  files:
